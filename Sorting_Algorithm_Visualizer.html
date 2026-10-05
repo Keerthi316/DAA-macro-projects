@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>DAA Sorting Lab Pro</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;color:#eef2ff;background:#060914;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;background:radial-gradient(circle at 15% 10%,#27215b55,transparent 35%),radial-gradient(circle at 85% 20%,#075f7350,transparent 32%),linear-gradient(135deg,#060914,#0a1020);z-index:-2}
+body:after{content:"";position:fixed;width:420px;height:420px;border-radius:50%;background:#7357ff18;filter:blur(80px);right:-150px;bottom:-150px;z-index:-1}
+.wrap{width:min(1250px,94%);margin:auto}.top{padding:28px 0 15px;display:flex;justify-content:space-between;align-items:center}.brand{display:flex;align-items:center;gap:12px;font-size:21px;font-weight:900}.brandIcon{width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,#7c5cff,#18d8b0);display:grid;place-items:center;box-shadow:0 0 28px #7357ff55}.pill{padding:8px 13px;border:1px solid #293351;background:#0d1427aa;border-radius:999px;color:#aab4ce;font-size:12px}
+.hero{padding:25px 0 30px}.hero h1{font-size:clamp(38px,6vw,70px);line-height:.98;margin:0 0 16px;letter-spacing:-3px}.grad{background:linear-gradient(90deg,#fff,#9b88ff,#5df0ca);color:transparent;background-clip:text;-webkit-background-clip:text}.hero p{max-width:800px;color:#99a4c0;line-height:1.7;margin:0}
+.panel{background:linear-gradient(145deg,#10172aee,#0c1222e8);border:1px solid #26304b;border-radius:22px;box-shadow:0 24px 80px #0007;backdrop-filter:blur(15px);padding:20px}.controls{display:grid;grid-template-columns:1.2fr 1.2fr 1.2fr auto auto;gap:12px;align-items:end}.field label{font-size:11px;color:#8f9ab5;display:block;margin-bottom:7px}.field select,.field input[type=text],.field input[type=number]{width:100%;background:#080e1d;color:#edf1ff;border:1px solid #283451;padding:12px;border-radius:11px;outline:none}.range{width:100%}button{border:0;border-radius:11px;padding:12px 17px;color:#fff;font-weight:800;cursor:pointer;transition:.18s}button:hover{transform:translateY(-2px);filter:brightness(1.12)}.primary{background:linear-gradient(135deg,#7c5cff,#5541d7)}.green{background:linear-gradient(135deg,#18d8a9,#108d73)}.dark{background:#202a43}
+.custom{margin-top:15px;display:grid;grid-template-columns:1fr auto;gap:10px}.hint{font-size:11px;color:#71809d;margin-top:6px}
+.stage{margin-top:18px}.stageHead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}.stageHead strong{font-size:18px}.status{font-size:12px;color:#93a0bd}.bars{height:360px;display:flex;align-items:flex-end;gap:4px;padding:22px 6px 8px;border-bottom:1px solid #27324c;overflow:hidden}.bar{flex:1;max-width:42px;min-width:4px;border-radius:8px 8px 2px 2px;background:linear-gradient(180deg,#9582ff,#5b47d4);position:relative;transition:height .08s,transform .08s,background .08s}.bar:after{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:#b5aaff66}.bar b{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:9px;color:#9eabc6;font-weight:600}.bar.cmp{background:linear-gradient(180deg,#ffd66d,#ff9d48);transform:translateY(-5px)}.bar.swap{background:linear-gradient(180deg,#ff7590,#df345b)}.bar.pivot{background:linear-gradient(180deg,#6ec1ff,#3c72dd)}.bar.done{background:linear-gradient(180deg,#54f3c5,#159d7c)}
+.metrics{display:grid;grid-template-columns:repeat(6,1fr);gap:9px;margin-top:14px}.metric{background:#080e1b;border:1px solid #222d47;border-radius:13px;padding:12px}.metric small{display:block;color:#74819d;font-size:10px;margin-bottom:5px}.metric b{font-size:17px}
+.grid{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;margin-top:18px}.card h2{margin:0 0 14px;font-size:17px}.algoGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:9px}.algoCard{padding:13px;border:1px solid #27324b;border-radius:14px;background:#0b1120;cursor:pointer}.algoCard.active{border-color:#806aff;background:#171538}.algoCard strong{font-size:12px}.algoCard span{display:block;color:#7886a3;font-size:10px;margin-top:7px}
+table{width:100%;border-collapse:collapse}th,td{padding:10px 7px;border-bottom:1px solid #26304a;font-size:11px;text-align:left}th{color:#7f8ba7}td{color:#cdd5e8}.tag{padding:4px 7px;border-radius:7px;background:#18213a;color:#aeb9d2}
+.explain{color:#8f9ab4;font-size:12px;line-height:1.7}.explain strong{color:#e7ebf8}.legend{display:flex;flex-wrap:wrap;gap:13px;margin-top:13px}.leg{font-size:11px;color:#929db6}.sw{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px}.normal{background:#705bdd}.orange{background:#ffb455}.pink{background:#e54b6b}.blue{background:#4c8be5}.greenSw{background:#28c99c}
+.bottom{margin:18px 0 40px}.footer{text-align:center;color:#5f6d89;font-size:11px;padding:10px 0 35px}
+@media(max-width:900px){.controls{grid-template-columns:1fr 1fr}.metrics{grid-template-columns:repeat(3,1fr)}.grid{grid-template-columns:1fr}.algoGrid{grid-template-columns:repeat(3,1fr)}}@media(max-width:560px){.controls{grid-template-columns:1fr}.metrics{grid-template-columns:1fr 1fr}.custom{grid-template-columns:1fr}.algoGrid{grid-template-columns:1fr 1fr}.bars{height:290px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><div class="brand"><div class="brandIcon">↯</div>DAA Sorting Lab</div><div class="pill">Interactive Algorithm Analysis • Unit I</div></header>
+
+<section class="hero">
+<h1>Watch algorithms <span class="grad">think, compare & sort.</span></h1>
+<p>A complete interactive sorting laboratory. Use your own numbers or generate random data, select an algorithm, control the animation, and compare real operation counts with theoretical time complexity.</p>
+</section>
+
+<section class="panel">
+<div class="controls">
+<div class="field"><label>ALGORITHM</label><select id="algo">
+<option value="bubble">Bubble Sort</option><option value="selection">Selection Sort</option><option value="insertion">Insertion Sort</option><option value="merge">Merge Sort</option><option value="quick">Quick Sort</option>
+</select></div>
+<div class="field"><label>ARRAY SIZE <span id="sizeOut">35</span></label><input class="range" id="size" type="range" min="8" max="70" value="35"></div>
+<div class="field"><label>SPEED <span id="speedOut">65%</span></label><input class="range" id="speed" type="range" min="1" max="100" value="65"></div>
+<button class="dark" onclick="randomize()">✦ Random</button><button class="primary" onclick="start()">▶ Sort</button>
+</div>
+
+<div class="custom">
+<div class="field"><label>YOUR OWN ELEMENTS</label><input id="customInput" type="text" placeholder="Example: 42, 7, 19, 3, 88, 12"></div>
+<button class="green" onclick="useCustom()">Use My Array</button>
+</div>
+<div class="hint">Tip: enter 8–70 numbers separated by commas or spaces. You can mix positive values.</div>
+
+<div class="stage">
+<div class="stageHead"><strong id="algoTitle">Bubble Sort</strong><span class="status" id="status">Ready • Choose an array and press Sort.</span></div>
+<div class="bars" id="bars"></div>
+<div class="metrics">
+<div class="metric"><small>COMPARISONS</small><b id="cmp">0</b></div>
+<div class="metric"><small>SWAPS / MOVES</small><b id="swaps">0</b></div>
+<div class="metric"><small>ARRAY SIZE</small><b id="count">35</b></div>
+<div class="metric"><small>PROGRESS</small><b id="prog">0%</b></div>
+<div class="metric"><small>TIME</small><b id="timer">0.00s</b></div>
+<div class="metric"><small>COMPLEXITY</small><b id="complex">O(n²)</b></div>
+</div>
+<div class="legend">
+<span class="leg"><i class="sw normal"></i>Normal</span><span class="leg"><i class="sw orange"></i>Comparing</span><span class="leg"><i class="sw pink"></i>Swap / Move</span><span class="leg"><i class="sw blue"></i>Pivot</span><span class="leg"><i class="sw greenSw"></i>Sorted</span>
+</div>
+</div>
+</section>
+
+<div class="grid">
+<section class="panel">
+<h2>Choose an algorithm</h2>
+<div class="algoGrid" id="algoCards">
+<div class="algoCard active" data-a="bubble"><strong>Bubble Sort</strong><span>O(n²) • Stable</span></div>
+<div class="algoCard" data-a="selection"><strong>Selection Sort</strong><span>O(n²) • In-place</span></div>
+<div class="algoCard" data-a="insertion"><strong>Insertion Sort</strong><span>O(n²) • Adaptive</span></div>
+<div class="algoCard" data-a="merge"><strong>Merge Sort</strong><span>O(n log n) • Stable</span></div>
+<div class="algoCard" data-a="quick"><strong>Quick Sort</strong><span>O(n log n)* • Pivot</span></div>
+</div>
+</section>
+<section class="panel">
+<h2>What is happening?</h2>
+<div class="explain" id="explain"><strong>Bubble Sort:</strong> repeatedly compares adjacent elements and swaps them when they are in the wrong order. Large values gradually move toward the end.</div>
+</section>
+</div>
+
+<section class="panel bottom">
+<h2 style="margin-top:0">Complexity comparison</h2>
+<table><thead><tr><th>Algorithm</th><th>Best</th><th>Average</th><th>Worst</th><th>Space</th><th>Idea</th></tr></thead>
+<tbody>
+<tr><td>Bubble Sort</td><td>O(n)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td><td><span class="tag">Adjacent swaps</span></td></tr>
+<tr><td>Selection Sort</td><td>O(n²)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td><td><span class="tag">Find minimum</span></td></tr>
+<tr><td>Insertion Sort</td><td>O(n)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td><td><span class="tag">Insert into prefix</span></td></tr>
+<tr><td>Merge Sort</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n)</td><td><span class="tag">Divide & conquer</span></td></tr>
+<tr><td>Quick Sort</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n²)</td><td>O(log n)</td><td><span class="tag">Partition around pivot</span></td></tr>
+</tbody></table>
+</section>
+
+<div class="footer">DAA Sorting Lab Pro • Macro Project • Interactive Visualization</div>
+</div>
+
+<script>
+let arr=[],original=[],steps=[],idx=0,running=false,startTime=0,cmp=0,moves=0;
+const info={
+bubble:{name:"Bubble Sort",o:"O(n²)",text:"repeatedly compares adjacent elements and swaps them when they are in the wrong order. Large values gradually move toward the end."},
+selection:{name:"Selection Sort",o:"O(n²)",text:"searches the unsorted portion for the minimum value and places it at the beginning of that portion."},
+insertion:{name:"Insertion Sort",o:"O(n²)",text:"builds a sorted prefix one element at a time by moving each new value into its correct position."},
+merge:{name:"Merge Sort",o:"O(n log n)",text:"divides the array into smaller parts, recursively sorts them, and merges the sorted parts."},
+quick:{name:"Quick Sort",o:"O(n log n)",text:"selects a pivot, partitions values around it, then recursively sorts the left and right partitions."}
+};
+const $=id=>document.getElementById(id);
+
+function randomize(){
+ if(running)return;
+ let n=+$("size").value;arr=Array.from({length:n},()=>Math.floor(Math.random()*99)+1);
+ original=[...arr];resetStats();draw();$("status").textContent="Random array generated • Ready to sort.";
+}
+function useCustom(){
+ if(running)return;
+ let vals=$("customInput").value.trim().split(/[\s,]+/).filter(Boolean).map(Number);
+ if(vals.length<2||vals.length>70||vals.some(v=>!Number.isFinite(v)||v<0)){alert("Enter 2 to 70 valid non-negative numbers.");return}
+ arr=vals;original=[...arr];$("size").value=arr.length;$("sizeOut").textContent=arr.length;resetStats();draw();$("status").textContent="Your custom array is loaded • Ready to sort.";
+}
+function resetStats(){cmp=0;moves=0;steps=[];idx=0;$("cmp").textContent=0;$("swaps").textContent=0;$("prog").textContent="0%";$("timer").textContent="0.00s";$("count").textContent=arr.length}
+function draw(active=[],kind=""){
+ let box=$("bars");box.innerHTML="";let max=Math.max(...arr,1);
+ arr.forEach((v,i)=>{let d=document.createElement("div");d.className="bar";d.style.height=(v/max*285+8)+"px";if(active.includes(i))d.classList.add(kind);
+ let b=document.createElement("b");b.textContent=v;d.appendChild(b);box.appendChild(d)});
+}
+function snap(a,b,type){steps.push({arr:[...arr],a,b,type})}
+function makeSteps(){
+ steps=[];let a=[...original];
+ function rec(x,y,t){steps.push({arr:[...a],a:x,b:y,type:t})}
+ function sw(x,y){[a[x],a[y]]=[a[y],a[x]];steps.push({arr:[...a],a:x,b:y,type:"swap"})}
+ let type=$("algo").value;
+ if(type==="bubble"){for(let i=0;i<a.length;i++){for(let j=0;j<a.length-i-1;j++){rec(j,j+1,"cmp");if(a[j]>a[j+1])sw(j,j+1)}steps.push({arr:[...a],a:a.length-i-1,b:-1,type:"done"})}}
+ if(type==="selection"){for(let i=0;i<a.length;i++){let m=i;for(let j=i+1;j<a.length;j++){rec(m,j,"cmp");if(a[j]<a[m])m=j}if(m!==i)sw(i,m);steps.push({arr:[...a],a:i,b:-1,type:"done"})}}
+ if(type==="insertion"){for(let i=1;i<a.length;i++){let j=i;while(j>0){rec(j-1,j,"cmp");if(a[j-1]>a[j]){sw(j-1,j);j--}else break}steps.push({arr:[...a],a:i,b:-1,type:"done"})}}
+ if(type==="merge"){
+  function merge(l,m,r){let L=a.slice(l,m+1),R=a.slice(m+1,r+1),i=0,j=0,k=l;while(i<L.length&&j<R.length){rec(l+i,m+1+j,"cmp");if(L[i]<=R[j])a[k++]=L[i++];else a[k++]=R[j++];steps.push({arr:[...a],a:k-1,b:-1,type:"swap"})}while(i<L.length){a[k]=L[i++];steps.push({arr:[...a],a:k,b:-1,type:"swap"});k++}while(j<R.length){a[k]=R[j++];steps.push({arr:[...a],a:k,b:-1,type:"swap"});k++}}
+  function ms(l,r){if(l>=r)return;let m=Math.floor((l+r)/2);ms(l,m);ms(m+1,r);merge(l,m,r)}ms(0,a.length-1);steps.push({arr:[...a],a:-1,b:-1,type:"all"})
+ }
+ if(type==="quick"){
+  function qs(l,r){if(l>=r)return;let p=a[r];steps.push({arr:[...a],a:r,b:-1,type:"pivot"});let i=l;for(let j=l;j<r;j++){rec(j,r,"cmp");if(a[j]<p){sw(i,j);i++}}sw(i,r);steps.push({arr:[...a],a:i,b:-1,type:"done"});qs(l,i-1);qs(i+1,r)}qs(0,a.length-1);steps.push({arr:[...a],a:-1,b:-1,type:"all"})
+ }
+}
+function start(){
+ if(running)return;makeSteps();running=true;idx=0;cmp=0;moves=0;startTime=performance.now();$("status").textContent="Sorting in progress…";tick()
+}
+function tick(){
+ if(idx>=steps.length){running=false;arr=[...steps[steps.length-1].arr];draw([...Array(arr.length).keys()],"done");$("prog").textContent="100%";$("status").textContent="✓ Sorting complete • Final array is sorted.";return}
+ let s=steps[idx];arr=[...s.arr];if(s.type==="cmp")cmp++;if(s.type==="swap")moves++;
+ let active=[];if(s.a>=0)active.push(s.a);if(s.b>=0)active.push(s.b);
+ if(s.type==="all")active=[...Array(arr.length).keys()];
+ draw(active,s.type==="cmp"?"cmp":s.type==="swap"?"swap":s.type==="pivot"?"pivot":s.type==="done"?"done":"done");
+ $("cmp").textContent=cmp;$("swaps").textContent=moves;$("prog").textContent=Math.round(idx/steps.length*100)+"%";$("timer").textContent=((performance.now()-startTime)/1000).toFixed(2)+"s";idx++;
+ let delay=Math.max(5,220-(+$("speed").value)*2.1);setTimeout(tick,delay)
+}
+function selectAlgo(a){
+ if(running)return;$("algo").value=a;updateInfo();randomize();
+ document.querySelectorAll(".algoCard").forEach(x=>x.classList.toggle("active",x.dataset.a===a))
+}
+function updateInfo(){let x=info[$("algo").value];$("algoTitle").textContent=x.name;$("complex").textContent=x.o;$("explain").innerHTML="<strong>"+x.name+":</strong> "+x.text}
+$("algo").addEventListener("change",()=>{updateInfo();document.querySelectorAll(".algoCard").forEach(x=>x.classList.toggle("active",x.dataset.a===$("algo").value))});
+$("size").addEventListener("input",e=>$("sizeOut").textContent=e.target.value);
+$("speed").addEventListener("input",e=>$("speedOut").textContent=e.target.value+"%");
+document.querySelectorAll(".algoCard").forEach(x=>x.onclick=()=>selectAlgo(x.dataset.a));
+updateInfo();randomize();
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+Create a beautiful, modern, professional interactive DAA sorting algorithm laboratory website.
+
+Include:
+- Bubble Sort
+- Selection Sort
+- Insertion Sort
+- Merge Sort
+- Quick Sort
+- Random array generation
+- Custom user-entered elements
+- Adjustable array size
+- Adjustable animation speed
+- Animated vertical bars
+- Comparison highlighting
+- Swap/move highlighting
+- Sorted-position highlighting
+- Quick Sort pivot highlighting
+- Live comparison counter
+- Live swaps/moves counter
+- Progress percentage
+- Runtime display
+- Current algorithm complexity
+- Algorithm explanation
+- Best/Average/Worst complexity comparison table
+- Responsive dark glassmorphism UI
+- Professional visual design suitable for a DAA college macro project
+- No backend; run directly in a browser
+
+Make the visualization educational, smooth, attractive and easy to demonstrate during a classroom review.

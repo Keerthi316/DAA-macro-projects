@@ -1,0 +1,57 @@
+PROJECT 1 – DAA SORTING LAB PRO
+
+Slide 1 – Title
+DAA Sorting Lab Pro
+Interactive Sorting Algorithm Visualizer
+Unit I – Algorithm Analysis
+
+Slide 2 – Problem Statement
+Different sorting algorithms solve the same problem using different strategies.
+This project visualizes their operations so that their behavior and complexity can be understood easily.
+
+Slide 3 – Algorithms
+• Bubble Sort
+• Selection Sort
+• Insertion Sort
+• Merge Sort
+• Quick Sort
+
+Slide 4 – User Interaction
+• Generate random elements.
+• Enter custom elements manually.
+• Select array size.
+• Control animation speed.
+• Select any sorting algorithm.
+• Start and observe sorting.
+
+Slide 5 – Visualization
+• Purple = normal element
+• Orange = comparison
+• Pink = swap/move
+• Blue = Quick Sort pivot
+• Green = sorted element
+
+Slide 6 – Live Metrics
+• Number of comparisons
+• Number of swaps/moves
+• Array size
+• Sorting progress
+• Runtime
+• Time complexity
+
+Slide 7 – Complexity
+Bubble: O(n²) average
+Selection: O(n²)
+Insertion: O(n²) average
+Merge: O(n log n)
+Quick: O(n log n) average, O(n²) worst
+
+Slide 8 – Learning Outcomes
+• Understood sorting techniques.
+• Observed algorithm behavior visually.
+• Connected operations with time complexity.
+• Practiced interactive visualization.
+• Learned how AI-assisted visualization can support DAA learning.
+
+Slide 9 – Conclusion
+The project provides an interactive environment to compare sorting algorithms and understand why their performance differs as input size increases.
