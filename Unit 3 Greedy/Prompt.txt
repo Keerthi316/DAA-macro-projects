@@ -1,0 +1,17 @@
+Draw a binary tree showing optimal merge pattern for files of sizes 10, 20, 30, 40.
+
+Create a beautiful, modern, professional interactive DAA Optimal Merge Pattern website with a weighted merge tree visualization.
+
+Include:
+- Default input 10, 20, 30, 40
+- Custom file sizes entered by the user
+- Greedy merge of the two smallest files at every step
+- Animated binary tree built step by step
+- Highlighting of files being merged and the new merged file
+- Live sorted working list
+- Merge step log with costs
+- Total cost and comparison with largest-first merging
+- Complexity display and algorithm explanation
+- Next Merge, Auto Play, Reset and speed control
+- Responsive dark glassmorphism UI
+- No backend; run directly in a browser
