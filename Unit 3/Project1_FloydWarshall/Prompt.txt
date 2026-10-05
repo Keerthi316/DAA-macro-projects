@@ -1,0 +1,36 @@
+Project: All-Pairs Shortest Path Matrix Update
+
+Problem Statement:
+------------------
+Implement the Floyd-Warshall algorithm to find the shortest paths between
+all pairs of vertices in a weighted directed graph.
+
+Prompt:
+-------
+"Show iterative updates of the distance matrix in the Floyd-Warshall algorithm."
+
+Outcome:
+--------
+Stepwise matrix visualization — the distance matrix is displayed at each
+intermediate vertex step (k = 0, 1, 2, ..., n-1), showing how shortest
+path estimates are progressively refined until the final all-pairs shortest
+path matrix is produced.
+
+Algorithm Overview:
+-------------------
+- Time Complexity  : O(n^3)
+- Space Complexity : O(n^2)
+- Works for        : Weighted directed graphs (handles negative weights,
+                     detects negative cycles)
+
+Input:
+------
+A weighted adjacency matrix where:
+  - matrix[i][j] = weight of edge from vertex i to vertex j
+  - matrix[i][j] = INF  if no direct edge exists
+  - matrix[i][i] = 0
+
+Output:
+-------
+- Printed distance matrix after each intermediate vertex k
+- Visualization.png — heatmap snapshots of the matrix at every step

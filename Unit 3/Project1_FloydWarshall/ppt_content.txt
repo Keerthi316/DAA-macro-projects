@@ -1,0 +1,268 @@
+============================================================
+  PPT CONTENT — Floyd-Warshall: All-Pairs Shortest Path
+============================================================
+
+------------------------------------------------------------
+SLIDE 1: Title Slide
+------------------------------------------------------------
+Title   : All-Pairs Shortest Path
+Subtitle: Floyd-Warshall Algorithm — Stepwise Matrix Visualization
+Subject : Design and Analysis of Algorithms (DAA)
+Name    : [Your Name]
+Date    : [Date]
+
+------------------------------------------------------------
+SLIDE 2: Problem Statement
+------------------------------------------------------------
+Title: Problem Statement
+
+• Given a weighted directed graph with n vertices and edges,
+  find the SHORTEST PATH between EVERY PAIR of vertices.
+
+• The graph may contain:
+    - Positive edge weights
+    - Negative edge weights (but no negative cycles)
+
+• Output: An n × n distance matrix where
+    dist[i][j] = shortest distance from vertex i to vertex j
+
+• Example Use Cases:
+    - Network routing
+    - GPS navigation
+    - Traffic flow analysis
+    - Social network analysis
+
+------------------------------------------------------------
+SLIDE 3: What is Floyd-Warshall?
+------------------------------------------------------------
+Title: Floyd-Warshall Algorithm
+
+• A classic Dynamic Programming algorithm
+
+• Proposed by Robert Floyd (1962) and Stephen Warshall (1962)
+
+• Solves the All-Pairs Shortest Path (APSP) problem
+
+• Key Idea:
+    Improve path estimate between every pair (i, j)
+    by checking if going through an intermediate vertex k
+    gives a shorter path.
+
+• Recurrence Relation:
+    dist[i][j] = min( dist[i][j],  dist[i][k] + dist[k][j] )
+
+  For every intermediate vertex k = 0, 1, 2, ..., n−1
+
+------------------------------------------------------------
+SLIDE 4: Algorithm Steps
+------------------------------------------------------------
+Title: Algorithm — Step by Step
+
+Step 1: Initialize the distance matrix
+        dist[i][j] = weight of direct edge (i → j)
+        dist[i][j] = INF  if no direct edge
+        dist[i][i] = 0    (distance to itself)
+
+Step 2: For each intermediate vertex k (0 to n−1):
+           For each source vertex i (0 to n−1):
+              For each destination vertex j (0 to n−1):
+                 if dist[i][k] + dist[k][j] < dist[i][j]:
+                    dist[i][j] = dist[i][k] + dist[k][j]
+
+Step 3: Final matrix contains all-pairs shortest distances.
+
+Step 4: If dist[i][i] < 0 for any i → Negative cycle detected!
+
+------------------------------------------------------------
+SLIDE 5: Sample Graph
+------------------------------------------------------------
+Title: Sample Graph Used
+
+Vertices: 4  (v0, v1, v2, v3)
+
+Edges (directed, weighted):
+    v0 → v1  (weight 3)
+    v0 → v3  (weight 7)
+    v1 → v2  (weight 2)
+    v2 → v3  (weight 1)
+    v3 → v1  (weight 1)
+
+Initial Adjacency Matrix:
+         v0    v1    v2    v3
+   v0  [  0,    3,  INF,    7 ]
+   v1  [INF,    0,    2,  INF ]
+   v2  [INF,  INF,    0,    1 ]
+   v3  [INF,    1,  INF,    0 ]
+
+------------------------------------------------------------
+SLIDE 6: Stepwise Matrix Updates
+------------------------------------------------------------
+Title: Iterative Distance Matrix Updates
+
+--- Initial Matrix ---
+         v0    v1    v2    v3
+   v0  [  0,    3,  INF,    7 ]
+   v1  [INF,    0,    2,  INF ]
+   v2  [INF,  INF,    0,    1 ]
+   v3  [INF,    1,  INF,    0 ]
+
+--- After k = 0 (via v0) ---
+  No shorter paths found through v0 (no incoming edges to v0)
+         v0    v1    v2    v3
+   v0  [  0,    3,  INF,    7 ]
+   v1  [INF,    0,    2,  INF ]
+   v2  [INF,  INF,    0,    1 ]
+   v3  [INF,    1,  INF,    0 ]
+
+--- After k = 1 (via v1) ---
+  v0→v2 updated: 0+3+2 = 5  (was INF)
+  v3→v2 updated: 1+2   = 3  (was INF)
+         v0    v1    v2    v3
+   v0  [  0,    3,    5,    7 ]
+   v1  [INF,    0,    2,  INF ]
+   v2  [INF,  INF,    0,    1 ]
+   v3  [INF,    1,    3,    0 ]
+
+--- After k = 2 (via v2) ---
+  v0→v3 updated: 5+1 = 6  (was 7)
+  v1→v3 updated: 2+1 = 3  (was INF)
+  v3→v3 updated: 3+1 = 4? No (0 stays)
+         v0    v1    v2    v3
+   v0  [  0,    3,    5,    6 ]
+   v1  [INF,    0,    2,    3 ]
+   v2  [INF,  INF,    0,    1 ]
+   v3  [INF,    1,    3,    4 ]
+
+--- After k = 3 (via v3) — Final Matrix ---
+  v0→v1 updated: 6+1 = 7? No (3 stays)
+  v1→v1 updated: 3+1 = 4? No (0 stays)
+         v0    v1    v2    v3
+   v0  [  0,    3,    5,    6 ]
+   v1  [INF,    0,    2,    3 ]
+   v2  [INF,    2,    0,    1 ]
+   v3  [INF,    1,    3,    4 ]
+
+------------------------------------------------------------
+SLIDE 7: Visualization
+------------------------------------------------------------
+Title: Stepwise Heatmap Visualization
+
+• Each step is shown as a color-coded heatmap matrix
+• Lighter color  → shorter / smaller distance
+• Darker color   → longer distance
+• Gray cells     → INF (no path exists)
+
+[Insert Visualization.png here]
+
+• Generated using Python (matplotlib + numpy)
+• Shows all n+1 snapshots in a single figure
+
+------------------------------------------------------------
+SLIDE 8: Complexity Analysis
+------------------------------------------------------------
+Title: Complexity Analysis
+
+Time Complexity:
+    Three nested loops (k, i, j) each running n times
+    → O(n³)
+
+Space Complexity:
+    Single n × n distance matrix
+    → O(n²)
+
+Comparison with other APSP algorithms:
+┌────────────────────┬────────────┬────────────┐
+│ Algorithm          │ Time       │ Notes      │
+├────────────────────┼────────────┼────────────┤
+│ Floyd-Warshall     │ O(n³)      │ All pairs  │
+│ Dijkstra (n times) │ O(n² logn) │ No neg wt  │
+│ Bellman-Ford (×n)  │ O(n² · E)  │ Neg weights│
+└────────────────────┴────────────┴────────────┘
+
+Floyd-Warshall is preferred when:
+  - Graph is dense
+  - Negative weights are present
+  - Simple implementation is needed
+
+------------------------------------------------------------
+SLIDE 9: Advantages & Limitations
+------------------------------------------------------------
+Title: Advantages & Limitations
+
+Advantages:
+  ✔ Simple and easy to implement
+  ✔ Handles negative edge weights
+  ✔ Finds ALL pairs in one run
+  ✔ Detects negative cycles
+
+Limitations:
+  ✘ O(n³) — slow for very large graphs
+  ✘ Does not work with negative cycles
+  ✘ Not suitable for sparse graphs
+     (Dijkstra repeated is more efficient)
+
+------------------------------------------------------------
+SLIDE 10: Real-World Applications
+------------------------------------------------------------
+Title: Real-World Applications
+
+1. Network Routing Protocols
+   → Find shortest paths between all routers
+
+2. GPS & Navigation Systems
+   → Precompute all city-to-city distances
+
+3. Social Networks
+   → Degree of separation between users
+
+4. Traffic & Transportation
+   → Optimize routes across entire road network
+
+5. Games & Simulations
+   → NPC pathfinding in game maps
+
+6. Compiler Optimization
+   → Data flow analysis
+
+------------------------------------------------------------
+SLIDE 11: Code Snippet
+------------------------------------------------------------
+Title: Core Algorithm — Python Code
+
+def floyd_warshall(graph):
+    n = len(graph)
+    dist = [row[:] for row in graph]  # copy matrix
+
+    for k in range(n):                # intermediate vertex
+        for i in range(n):            # source
+            for j in range(n):        # destination
+                if dist[i][k] + dist[k][j] < dist[i][j]:
+                    dist[i][j] = dist[i][k] + dist[k][j]
+
+    return dist
+
+Key Points:
+  • dist[i][k] != INF and dist[k][j] != INF checked before update
+  • Matrix is updated IN-PLACE per iteration of k
+  • Final matrix = all-pairs shortest path solution
+
+------------------------------------------------------------
+SLIDE 12: Conclusion
+------------------------------------------------------------
+Title: Conclusion
+
+• Floyd-Warshall solves All-Pairs Shortest Path in O(n³)
+
+• Uses Dynamic Programming with a simple 3-loop structure
+
+• Visualizing the stepwise matrix updates helps understand
+  how paths are progressively improved through each
+  intermediate vertex k
+
+• Effective for dense graphs and graphs with negative weights
+
+• Widely used in networking, navigation, and graph theory
+
+------------------------------------------------------------
+  END OF PRESENTATION
+============================================================
