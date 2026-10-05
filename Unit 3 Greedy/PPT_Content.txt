@@ -1,0 +1,48 @@
+PROJECT – DAA OPTIMAL MERGE PATTERN LAB
+
+Slide 1 – Title
+DAA Optimal Merge Pattern Lab
+Weighted Merge Tree Visualizer
+Greedy Method
+
+Slide 2 – Problem Statement
+Draw a binary tree showing optimal merge pattern for files of sizes 10, 20, 30, 40.
+Merging two files of sizes a and b costs a + b. Find the order with minimum total cost.
+
+Slide 3 – Greedy Strategy
+• Keep all file sizes in a min-heap / sorted list.
+• Remove the two smallest files.
+• Merge them and insert the new size back.
+• Repeat until one file remains.
+
+Slide 4 – Solution
+Merge 10 + 20 = 30
+Merge 30 + 30 = 60
+Merge 40 + 60 = 100
+Total cost = 30 + 60 + 100 = 190
+
+Slide 5 – Visualization
+• Purple = original file (leaf)
+• Orange = files being merged
+• Pink = newly merged file
+• Green = earlier merged file
+
+Slide 6 – Live Metrics
+• Number of files
+• Merges completed
+• Last merge cost
+• Total cost
+• Largest-first cost for comparison
+
+Slide 7 – Complexity
+n-1 merges, each heap operation O(log n)
+Total: O(n log n)
+
+Slide 8 – Learning Outcomes
+• Understood the greedy choice.
+• Built a weighted binary merge tree.
+• Connected cost with Σ(size × depth).
+• Related it to Huffman coding.
+
+Slide 9 – Conclusion
+Always merging the two smallest files gives the minimum total merge cost (190 for 10, 20, 30, 40).
