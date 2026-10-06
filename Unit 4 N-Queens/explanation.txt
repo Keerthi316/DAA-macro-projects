@@ -1,0 +1,148 @@
+============================================================
+              N-QUEENS ALGORITHM - EXPLANATION
+                    State Space Tree (N = 4)
+============================================================
+
+
+ALGORITHM LOGIC
+---------------
+
+The N-Queens problem is solved using the BACKTRACKING technique.
+
+The algorithm places queens one row at a time. For each row, it
+tries every possible column and checks whether placing a queen at
+that position is safe.
+
+A position is SAFE when:
+
+    1. No previously placed queen is in the same column.
+    2. No previously placed queen is on the same diagonal.
+
+If the position is safe:
+    -> Place the queen.
+    -> Move to the next row using recursion.
+
+If the position is not safe:
+    -> Reject the position.
+    -> Mark the branch as INVALID.
+    -> Try the next column.
+
+If all N queens are successfully placed:
+    -> A solution is found.
+
+After exploring a position, the queen is removed and the algorithm
+BACKTRACKS to try another possible position.
+
+
+VISUALIZATION
+-------------
+
+The state space tree represents the recursive exploration of the
+algorithm.
+
+    - Each LEVEL represents a row of the chessboard.
+    - Each NODE represents a column chosen for a queen.
+    - RED branches represent INVALID placements.
+    - GREEN branches represent SAFE placements.
+    - PURPLE nodes represent COMPLETE solutions.
+
+Example:
+
+                         []
+                    /    |    |    \
+                   [1]  [2]  [3]  [4]
+                    |    |    |    |
+                   ...  ...  ...  ...
+                         |    |
+                      [2,4] [3,1]
+                         |      |
+                    [2,4,1]  [3,1,4]
+                         |      |
+                  [2,4,1,3] [3,1,4,2]
+                      SOLUTION  SOLUTION
+
+
+VALID SOLUTIONS FOR N = 4
+--------------------------
+
+Solution 1:
+
+    [2, 4, 1, 3]
+
+    Row 1 -> Column 2
+    Row 2 -> Column 4
+    Row 3 -> Column 1
+    Row 4 -> Column 3
+
+
+Solution 2:
+
+    [3, 1, 4, 2]
+
+    Row 1 -> Column 3
+    Row 2 -> Column 1
+    Row 3 -> Column 4
+    Row 4 -> Column 2
+
+
+BACKTRACKING FLOW
+-----------------
+
+    Start
+      |
+      v
+    Select a column
+      |
+      v
+    Is the position safe?
+      |
+      +-------- NO --------> Mark INVALID
+      |                         |
+     YES                        v
+      |                    Try next column
+      v
+    Place queen
+      |
+      v
+    Move to next row
+      |
+      v
+    Are all queens placed?
+      |
+      +-------- YES -------> Solution Found
+      |
+      NO
+      |
+      v
+    Remove queen
+      |
+      v
+    BACKTRACK
+      |
+      v
+    Try next position
+
+
+KEY IDEA
+--------
+
+Backtracking avoids exploring branches that cannot lead to a
+solution.
+
+Whenever an invalid placement is encountered, that entire branch
+of the state space tree is pruned. This makes the search more
+efficient than checking every possible arrangement.
+
+
+RESULT
+------
+
+For N = 4:
+
+    Number of queens : 4
+    Board size       : 4 x 4
+    Valid solutions  : 2
+    Technique        : Backtracking
+    Search method    : Recursive Depth-First Search
+
+============================================================

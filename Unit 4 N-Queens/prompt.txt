@@ -1,0 +1,40 @@
+I am working on an N-Queens backtracking project for N = 4. Provide these outputs:
+
+1. ALGORITHM + PSEUDOCODE
+Explain the backtracking algorithm briefly and give pseudocode for NQUEENS(row) and SAFE(row,col). It should place queens row-by-row, check column/diagonal conflicts, recursively explore safe positions, and backtrack on invalid branches.
+
+2. TXT FILE CONTENT
+Give clean, GitHub-friendly plain-text content containing:
+- Algorithm logic
+- Pseudocode
+- State-space-tree explanation
+- Backtracking flow
+- Result and the two solutions:
+  [2,4,1,3]
+  [3,1,4,2]
+
+3. VISUALIZATION
+Create a clear recursive state-space tree for N=4:
+- Show queen placements row-by-row.
+- Mark invalid/pruned branches in red.
+- Show valid branches and the two final solutions.
+- Include 4×4 chessboards where useful.
+
+IMPORTANT: Every chessboard MUST exactly match the row/column state.
+[2,4,1,3], [3,1,4,2]
+
+Verify all queen positions before generating the visualization.
+
+4. JAVA CODE
+Give simple beginner-friendly Java code using backtracking with:
+- int[] board
+- safe()
+- solve()
+- printBoard()
+- main()
+- N = 4
+
+Print both solutions as chessboards.
+
+5. SHORT EXPLANATION
+Give a concise explanation of the algorithm, backtracking, state-space tree, invalid branches, and the two solutions.
