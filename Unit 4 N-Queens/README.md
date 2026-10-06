@@ -76,7 +76,7 @@ Because conflicts are checked as each queen is placed, invalid branches are cut 
 
 | State Space Tree | Backtracking Flow |
 |:---:|:---:|
-| ![State Space Tree](state-space-tree.png) | ![Backtracking Flow](backtracking-flow.png) |
+| ![concept](concept-visualization.png) | ![algorithm Flow](flow-visualization.png) |
 
 - 🟢 **Green** — safe placements
 - 🔴 **Red** — invalid placements (pruned)
