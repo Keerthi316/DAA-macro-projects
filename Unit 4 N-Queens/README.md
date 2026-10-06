@@ -74,7 +74,7 @@ Because conflicts are checked as each queen is placed, invalid branches are cut 
 
 ## 🖼️ Visualizations
 
-| State Space Tree | Backtracking Flow |
+| Concept | Algorithm Flow |
 |:---:|:---:|
 | ![concept](concept-visualization.png) | ![algorithm Flow](flow-visualization.png) |
 
