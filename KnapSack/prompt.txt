@@ -1,0 +1,24 @@
+Create a clear educational state-space tree visualization for
+the 0/1 Knapsack problem using the Branch and Bound technique.
+
+Use 4 items with weights [2, 3, 4, 5] and profits
+[40, 50, 65, 70], with knapsack capacity 7.
+
+Each node should show:
+- Level
+- Current weight
+- Current profit
+- Upper bound
+
+At every level, show two branches:
+- Include the item
+- Exclude the item
+
+Clearly mark nodes that are pruned because their upper bound
+is less than or equal to the current best profit.
+
+Highlight the optimal solution path and clearly distinguish
+active nodes from pruned nodes.
+
+Make the diagram clean, hierarchical, labeled, and suitable
+for a college DAA project presentation.
